@@ -16,9 +16,9 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text('My App'),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          IconRow()
+          IconRow(),
         ],
       ),
     ),
