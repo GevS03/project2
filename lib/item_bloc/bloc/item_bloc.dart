@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:project2/item.dart';
 
 part 'item_event.dart';
 part 'item_state.dart';
 
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ItemBloc() : super(ItemState()) {
-    on<ItemMarkEvent>(_onMark);
+    on<ItemAddEvent>(_add);
   }
 
-  _onMark(ItemMarkEvent event, Emitter emit) {
-    emit(state.copyWith(color: event.color, selected: event.selected));
+  _add(ItemAddEvent event, Emitter emit) {
+    emit(state.copyWith(item: event.item));
   }
 }

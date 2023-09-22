@@ -3,9 +3,8 @@ part of 'item_bloc.dart';
 @immutable
 sealed class ItemEvent {}
 
-class ItemMarkEvent extends ItemEvent {
-  final Color color;
-  final bool selected;
+class ItemAddEvent extends ItemEvent {
+  final Item item;
 
-  ItemMarkEvent({required this.color, required this.selected});
+  ItemAddEvent({required this.item});
 }

@@ -1,17 +1,15 @@
 part of 'item_bloc.dart';
 
-@immutable
-class ItemState {
-  final Color color;
-  final bool selected;
 
-  ItemState({this.color = Colors.grey, this.selected = false});
+class ItemState {
+  final Item item;
+  List<Item> selectedItems = [];
+
+  ItemState({this.item = const Item(width: 50, height: 50)});
 
   ItemState copyWith({
-    bool? selected,
-    Color? color
+    Item? item,
   }) {
-    
-    return ItemState(color: color ?? this.color, selected: selected ?? this.selected);
+    return ItemState(item: item ?? this.item);
   }
 }
