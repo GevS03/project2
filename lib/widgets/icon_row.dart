@@ -42,13 +42,15 @@ class _IconRowState extends State<IconRow> {
     ),
     Item(width: 100, height: 60),
   ];
+  
+  List<Item> selectedItems = [];
 
   final List<ItemColor> colors = [
     ItemColor(color: Colors.red),
     ItemColor(color: Colors.blue),
     ItemColor(color: Colors.yellow),
     ItemColor(color: Colors.orange),
-    ItemColor(color: Colors.black),
+    ItemColor(color: Colors.pink),
   ];
 
   @override
@@ -72,7 +74,7 @@ class _IconRowState extends State<IconRow> {
                       indicatorPadding: EdgeInsets.only(top: 94),
                       isScrollable: true,
                       indicator: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.black,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       onTap: (value) {
                         log("value __ $value");
@@ -93,7 +95,7 @@ class _IconRowState extends State<IconRow> {
                       indicatorPadding: EdgeInsets.only(top: 94),
                       isScrollable: true,
                       indicator: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.black,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       onTap: (value) {
                         log("value __ $value");
@@ -104,13 +106,16 @@ class _IconRowState extends State<IconRow> {
               Padding(padding: EdgeInsets.only(top: 30)),
               ElevatedButton(
                   onPressed: () {
-                    // itemBloc.add(ItemAddEvent(selectedItems: selectedItems));
+                    setState(() {
+                      selectedItems.add(state.item);
+                    });
+                    
                   },
                   child: Text('Add')),
+                  Padding(padding: EdgeInsets.only(top: 30)),
               Column(
-                  children: [
-                    state.item
-                  ],
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: selectedItems,
                   )
             ],
           );
