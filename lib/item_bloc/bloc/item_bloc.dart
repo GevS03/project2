@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:project2/item.dart';
 
@@ -7,10 +8,15 @@ part 'item_state.dart';
 
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ItemBloc() : super(ItemState()) {
-    on<ItemAddEvent>(_add);
+    on<ItemAddItemEvent>(_addItem);
+    on<ItemAddColorEvent>(_addColor);
   }
 
-  _add(ItemAddEvent event, Emitter emit) {
+  _addItem(ItemAddItemEvent event, Emitter emit) {
     emit(state.copyWith(item: event.item));
+  }
+
+  _addColor(ItemAddColorEvent event, Emitter emit) {
+    emit(state.copyWith(color: event.color));
   }
 }

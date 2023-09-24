@@ -42,7 +42,7 @@ class _IconRowState extends State<IconRow> {
     ),
     Item(width: 100, height: 60),
   ];
-  
+
   List<Item> selectedItems = [];
 
   final List<ItemColor> colors = [
@@ -78,8 +78,7 @@ class _IconRowState extends State<IconRow> {
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       onTap: (value) {
                         log("value __ $value");
-                        itemBloc.add(ItemAddEvent(item: items[value]));
-                        
+                        itemBloc.add(ItemAddItemEvent(item: items[value]));
                       },
                       tabs: items,
                     )),
@@ -99,6 +98,8 @@ class _IconRowState extends State<IconRow> {
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       onTap: (value) {
                         log("value __ $value");
+                        itemBloc
+                            .add(ItemAddColorEvent(color: colors[value].color));
                       },
                       tabs: colors,
                     )),
@@ -109,14 +110,13 @@ class _IconRowState extends State<IconRow> {
                     setState(() {
                       selectedItems.add(state.item);
                     });
-                    
                   },
                   child: Text('Add')),
-                  Padding(padding: EdgeInsets.only(top: 30)),
+              Padding(padding: EdgeInsets.only(top: 30)),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: selectedItems,
-                  )
+                children: selectedItems,
+              )
             ],
           );
         },
