@@ -24,41 +24,46 @@ class _MyAppState extends State<MyApp> {
       ),
       body: SingleChildScrollView(
           child: BlocProvider(
-            create: (context) => itemBloc,
-            child: BlocBuilder<ItemBloc, ItemState>(
-              bloc: itemBloc,
-              builder: (context, state) {
-                final Item item = state.item;
-                final Color color = state.color;
-                return Column(
+        create: (context) => itemBloc,
+        child: BlocBuilder<ItemBloc, ItemState>(
+          bloc: itemBloc,
+          builder: (context, state) {
+            final Item item = state.item;
+            final Color color = state.color;
+            return Column(
+              children: [
+                ItemsTabBar(itemBloc: itemBloc),
+                ColorsTabBar(itemBloc: itemBloc),
+                Padding(padding: EdgeInsets.only(top: 30)),
+                ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedItems.add(Item(
+                          color: color,
+                          width: item.width,
+                          height: item.height,
+                          bottomLeftR: item.bottomLeftR,
+                          bottomRightR: item.bottomRightR,
+                          topLeftR: item.topLeftR,
+                          topRightR: item.topRightR,
+                          margin: 30,
+                        ));
+                      });
+                    },
+                    child: Text('Add')),
+                Padding(padding: EdgeInsets.only(top: 30)),
+                Column(
                   children: [
-                    ItemsTabBar(itemBloc: itemBloc),
-                    ColorsTabBar(itemBloc: itemBloc),
-                    Padding(padding: EdgeInsets.only(top: 30)),
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedItems.add(Item(
-                              color: color,
-                              width: item.width,
-                              height: item.height,
-                              bottomLeftR: item.bottomLeftR,
-                              bottomRightR: item.bottomRightR,
-                              topLeftR: item.topLeftR,
-                              topRightR: item.topRightR,
-                            ));
-                          });
-                        },
-                        child: Text('Add')),
-                    Padding(padding: EdgeInsets.only(top: 30)),
-                    Column(
-                      children: [...selectedItems.map((item) => item)],
-                    )
+                    ...selectedItems.map((item) {
+                      return item;
+                    })
                   ],
-                );
-              },
-            ),
-          )),
+                )
+              ],
+            );
+          },
+        ),
+      )),
     );
   }
 }
