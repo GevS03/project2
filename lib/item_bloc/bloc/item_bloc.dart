@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:project2/item.dart';
+import 'package:project2/widgets/item.dart';
 
 part 'item_event.dart';
 part 'item_state.dart';

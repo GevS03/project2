@@ -6,7 +6,7 @@ class ItemState {
   List<Item> selectedItem = [];
 
   ItemState(
-      {this.item = const Item(width: 50, height: 50), this.color = Colors.red});
+      {this.item = const Item(width: 60, height: 60), this.color = Colors.red});
 
   ItemState copyWith({
     Item? item,

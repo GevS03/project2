@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
-  const Item(
-      {super.key,
-      required this.width,
-      required this.height,
-      this.topLeftR = 0,
-      this.topRightR = 0,
-      this.bottomLeftR = 0,
-      this.bottomRightR = 0,
-      });
+  const Item({
+    super.key,
+    required this.width,
+    required this.height,
+    this.topLeftR = 0,
+    this.topRightR = 0,
+    this.bottomLeftR = 0,
+    this.bottomRightR = 0,
+    this.color = Colors.blue
+  });
 
   final double height;
   final double width;
@@ -17,6 +18,7 @@ class Item extends StatelessWidget {
   final double topRightR;
   final double bottomLeftR;
   final double bottomRightR;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class Item extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          color: Colors.blue,
+          color: color,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(topLeftR),
               topRight: Radius.circular(topRightR),
