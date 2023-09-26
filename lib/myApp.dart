@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
                           topLeftR: item.topLeftR,
                           topRightR: item.topRightR,
                           margin: 30,
+                          borderColor: color,
                         ));
                       });
                     },
@@ -54,9 +55,7 @@ class _MyAppState extends State<MyApp> {
                 Padding(padding: EdgeInsets.only(top: 30)),
                 Column(
                   children: [
-                    ...selectedItems.map((item) {
-                      return item;
-                    })
+                    ...selectedItems.map((item) => item)
                   ],
                 )
               ],
