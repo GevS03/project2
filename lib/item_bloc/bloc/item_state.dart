@@ -3,7 +3,6 @@ part of 'item_bloc.dart';
 class ItemState {
   final Item item;
   final Color color;
-  List<Item> selectedItem = [];
 
   ItemState(
       {this.item = const Item(width: 60, height: 60), this.color = Colors.red});
