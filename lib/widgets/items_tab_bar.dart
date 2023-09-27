@@ -15,7 +15,7 @@ class ItemsTabBar extends StatelessWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      color: const Color.fromARGB(255, 117, 117, 117),
+      color: Colors.grey,
       child: DefaultTabController(
           length: items.length,
           child: TabBar(
