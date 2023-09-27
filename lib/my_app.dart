@@ -13,14 +13,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
   List<Item> selectedItems = [];
 
   @override
   Widget build(BuildContext context) {
     final itemBloc = ItemBloc();
     return Scaffold(
+      backgroundColor: const Color.fromARGB(115, 84, 84, 84),
       appBar: AppBar(
-        title: Text('My App'),
+        backgroundColor: const Color.fromARGB(115, 84, 84, 84),
+        title: const Text('My App'),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
           child: BlocProvider(
@@ -30,11 +34,12 @@ class _MyAppState extends State<MyApp> {
           builder: (context, state) {
             final Item item = state.item;
             final Color color = state.color;
+            
             return Column(
               children: [
                 ItemsTabBar(itemBloc: itemBloc),
                 ColorsTabBar(itemBloc: itemBloc),
-                Padding(padding: EdgeInsets.only(top: 30)),
+                const Padding(padding: EdgeInsets.only(top: 30)),
                 ElevatedButton(
                     onPressed: () {
                       setState(() {
@@ -51,8 +56,8 @@ class _MyAppState extends State<MyApp> {
                         ));
                       });
                     },
-                    child: Text('Add')),
-                Padding(padding: EdgeInsets.only(top: 30)),
+                    child: const Text('Add')),
+                const Padding(padding: EdgeInsets.only(top: 30)),
                 Column(
                   children: [
                     ...selectedItems.map((item) => item)

@@ -1,8 +1,8 @@
 import 'package:project2/widgets/item.dart';
 
 final List<Item> items = [
-    Item(width: 60, height: 60),
-    Item(
+    const Item(width: 60, height: 60),
+    const Item(
       width: 60,
       height: 60,
       topLeftR: 50,
@@ -10,7 +10,7 @@ final List<Item> items = [
       bottomLeftR: 50,
       bottomRightR: 50,
     ),
-    Item(
+    const Item(
       width: 60,
       height: 60,
       topLeftR: 70,
@@ -18,7 +18,7 @@ final List<Item> items = [
       bottomLeftR: 30,
       bottomRightR: 70,
     ),
-    Item(
+    const Item(
       width: 60,
       height: 60,
       topLeftR: 30,
@@ -26,5 +26,5 @@ final List<Item> items = [
       bottomLeftR: 70,
       bottomRightR: 30,
     ),
-    Item(width: 100, height: 60),
+    const Item(width: 100, height: 60),
   ];

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project2/myApp.dart';
+import 'package:project2/my_app.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: MyApp(),
   ));
 }

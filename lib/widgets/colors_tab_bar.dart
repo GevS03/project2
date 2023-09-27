@@ -15,14 +15,14 @@ class ColorsTabBar extends StatelessWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      color: Colors.grey,
+      color: const Color.fromARGB(255, 117, 117, 117),
       child: DefaultTabController(
           length: colors.length,
           child: TabBar(
             indicatorSize: TabBarIndicatorSize.label,
-            indicatorPadding: EdgeInsets.only(top: 94),
+            indicatorPadding: const EdgeInsets.only(top: 94),
             isScrollable: true,
-            indicator: BoxDecoration(
+            indicator: const BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             onTap: (value) {
