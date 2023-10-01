@@ -7,15 +7,10 @@ part 'item_state.dart';
 
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ItemBloc() : super(ItemState()) {
-    on<ItemAddItemEvent>(_addItem);
-    on<ItemAddColorEvent>(_addColor);
+    on<ItemAddEvent>(_selectItem);
   }
 
-  _addItem(ItemAddItemEvent event, Emitter emit) {
-    emit(state.copyWith(item: event.item));
-  }
-
-  _addColor(ItemAddColorEvent event, Emitter emit) {
-    emit(state.copyWith(color: event.color));
+  _selectItem(ItemAddEvent event, Emitter emit) {
+    emit(state.copyWith(selectedItems: event.selectedItems));
   }
 }

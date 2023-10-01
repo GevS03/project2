@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project2/colors.dart';
 import 'package:project2/item_bloc/bloc/item_bloc.dart';
-import 'package:project2/widgets/colors_tab_bar.dart';
+import 'package:project2/items.dart';
 import 'package:project2/widgets/item.dart';
-import 'package:project2/widgets/items_tab_bar.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -13,14 +13,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
   List<Item> selectedItems = [];
+
+  Item? selecteditem;
+  Color? selectedColor;
 
   @override
   Widget build(BuildContext context) {
     final itemBloc = ItemBloc();
     return Scaffold(
-      backgroundColor: const Color.fromARGB(115, 84, 84, 84),
+      backgroundColor: const Color.fromARGB(115, 158, 158, 158),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(115, 84, 84, 84),
         title: const Text('My App'),
@@ -29,43 +31,77 @@ class _MyAppState extends State<MyApp> {
       body: SingleChildScrollView(
           child: BlocProvider(
         create: (context) => itemBloc,
-        child: BlocBuilder<ItemBloc, ItemState>(
-          bloc: itemBloc,
-          builder: (context, state) {
-            final Item item = state.item;
-            final Color color = state.color;
-            
-            return Column(
-              children: [
-                ItemsTabBar(itemBloc: itemBloc),
-                ColorsTabBar(itemBloc: itemBloc),
-                const Padding(padding: EdgeInsets.only(top: 30)),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedItems.add(Item(
-                          color: color,
-                          width: item.width,
-                          height: item.height,
-                          bottomLeftR: item.bottomLeftR,
-                          bottomRightR: item.bottomRightR,
-                          topLeftR: item.topLeftR,
-                          topRightR: item.topRightR,
-                          margin: 30,
-                          borderColor: color,
-                        ));
-                      });
-                    },
-                    child: const Text('Add')),
-                const Padding(padding: EdgeInsets.only(top: 30)),
-                Column(
+        child: Column(
+          children: [
+            SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...items.map((item) {
+                        return IconButton(
+                          onPressed: () {
+                            selecteditem = item;
+                          },
+                          icon: item,
+                          iconSize: 80,
+                        );
+                      })
+                    ],
+                  ),
+                )),
+            SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ...selectedItems.map((item) => item)
+                    ...colors.map((colorElement) {
+                      return IconButton(
+                        onPressed: () {
+                          selectedColor = colorElement.color;
+                        },
+                        icon: colorElement,
+                        iconSize: 80,
+                      );
+                    })
                   ],
-                )
-              ],
-            );
-          },
+                ),
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 40)),
+            ElevatedButton(
+                onPressed: () {
+                  if (selecteditem != null) {
+                    selectedItems.add(Item(
+                      width: selecteditem!.width,
+                      height: selecteditem!.height,
+                      topLeftR: selecteditem!.topLeftR,
+                      topRightR: selecteditem!.topRightR,
+                      bottomLeftR: selecteditem!.bottomLeftR,
+                      bottomRightR: selecteditem!.bottomRightR,
+                      color: selectedColor ?? Colors.white,
+                      margin: 30,
+                    ));
+                  } else {
+                    throw 'error __ Add Item';
+                  }
+
+                  itemBloc.add(ItemAddEvent(selectedItems: selectedItems));
+                },
+                child: const Text('Add Item')),
+            BlocBuilder<ItemBloc, ItemState>(
+              bloc: itemBloc,
+              builder: (context, state) {
+                return Column(
+                  children: state.selectedItems,
+                );
+              },
+            )
+          ],
         ),
       )),
     );

@@ -1,16 +1,14 @@
 part of 'item_bloc.dart';
 
+@immutable
 class ItemState {
-  final Item item;
-  final Color color;
+  final List<Item> selectedItems;
 
-  ItemState(
-      {this.item = const Item(width: 60, height: 60), this.color = Colors.red});
+  ItemState({this.selectedItems = const []});
 
   ItemState copyWith({
-    Item? item,
-    Color? color,
+    List<Item>? selectedItems,
   }) {
-    return ItemState(item: item ?? this.item, color: color ?? this.color);
+    return ItemState(selectedItems: selectedItems ?? this.selectedItems);
   }
 }
