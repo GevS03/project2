@@ -33,46 +33,39 @@ class _MyAppState extends State<MyApp> {
         create: (context) => itemBloc,
         child: Column(
           children: [
-            SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ...items.map((item) {
-                        return IconButton(
-                          onPressed: () {
-                            selecteditem = item;
-                          },
-                          icon: item,
-                          iconSize: 80,
-                        );
-                      })
-                    ],
-                  ),
+            DefaultTabController(
+                length: items.length,
+                child: TabBar(
+                  indicatorPadding: const EdgeInsets.only(top: 82),
+                  indicatorWeight: 10,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicator: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  labelPadding: const EdgeInsets.all(10),
+                  isScrollable: true,
+                  onTap: (value) {
+                    selecteditem = items[value];
+                  },
+                  tabs: [...items.map((item) => item)],
                 )),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ...colors.map((colorElement) {
-                      return IconButton(
-                        onPressed: () {
-                          selectedColor = colorElement.color;
-                        },
-                        icon: colorElement,
-                        iconSize: 80,
-                      );
-                    })
-                  ],
-                ),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 40)),
+            DefaultTabController(
+                length: colors.length,
+                child: TabBar(
+                  indicatorPadding: const EdgeInsets.only(top: 82),
+                  indicatorWeight: 10,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicator: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  labelPadding: const EdgeInsets.all(10),
+                  isScrollable: true,
+                  onTap: (value) {
+                    selectedColor = colors[value].color;
+                  },
+                  tabs: [...colors.map((color) => color)],
+                )),
+            const Padding(padding: EdgeInsets.only(top: 40)),
             ElevatedButton(
                 onPressed: () {
                   if (selecteditem != null) {
@@ -87,7 +80,14 @@ class _MyAppState extends State<MyApp> {
                       margin: 30,
                     ));
                   } else {
-                    throw 'error __ Add Item';
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const AlertDialog(
+                          content: Text('Please Add Item'),
+                        );
+                      },
+                    );
                   }
 
                   itemBloc.add(ItemAddEvent(selectedItems: selectedItems));

@@ -1,6 +1,5 @@
 part of 'item_bloc.dart';
 
-@immutable
 class ItemState {
   final List<Item> selectedItems;
 

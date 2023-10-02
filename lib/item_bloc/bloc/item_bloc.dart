@@ -7,10 +7,10 @@ part 'item_state.dart';
 
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ItemBloc() : super(ItemState()) {
-    on<ItemAddEvent>(_selectItem);
+    on<ItemAddEvent>(_addItem);
   }
 
-  _selectItem(ItemAddEvent event, Emitter emit) {
+  _addItem(ItemAddEvent event, Emitter emit) {
     emit(state.copyWith(selectedItems: event.selectedItems));
   }
 }

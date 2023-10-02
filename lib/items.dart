@@ -27,4 +27,5 @@ final List<Item> items = [
       bottomRightR: 30,
     ),
     const Item(width: 100, height: 60),
+    const Item(width: 60, height: 60,  topLeftR: 70, topRightR: 70,)
   ];
