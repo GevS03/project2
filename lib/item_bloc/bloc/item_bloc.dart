@@ -12,5 +12,6 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   _addItem(ItemAddEvent event, Emitter emit) {
     emit(state.copyWith(selectedItems: event.selectedItems));
+    state.selectedItems.add(event.selectedItem);
   }
 }

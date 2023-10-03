@@ -5,7 +5,8 @@ sealed class ItemEvent {}
 
 class ItemAddEvent extends ItemEvent {
   final List<Item> selectedItems;
+  final Item selectedItem;
 
-  ItemAddEvent({required this.selectedItems});
+  ItemAddEvent({required this.selectedItems, required this.selectedItem});
 }
 

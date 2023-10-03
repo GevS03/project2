@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class Item extends StatelessWidget {
   const Item({
     super.key,
-    required this.width,
-    required this.height,
+    this.width = 0,
+    this.height = 0,
     this.topLeftR = 0,
     this.topRightR = 0,
     this.bottomLeftR = 0,
