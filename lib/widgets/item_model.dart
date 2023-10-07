@@ -10,8 +10,6 @@ class Item extends StatelessWidget {
     this.bottomLeftR = 0,
     this.bottomRightR = 0,
     this.color = Colors.white,
-    this.margin = 0,
-    this.borderColor = Colors.black
   });
 
   final double height;
@@ -21,19 +19,16 @@ class Item extends StatelessWidget {
   final double bottomLeftR;
   final double bottomRightR;
   final Color color;
-  final double margin;
-  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(margin),
       width: width,
       height: height,
       decoration: BoxDecoration(
           color: color,
           border: Border.all(
-              color: borderColor, width: 2, style: BorderStyle.solid),
+              color: Colors.black, width: 2, style: BorderStyle.solid),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(topLeftR),
               topRight: Radius.circular(topRightR),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project2/colors.dart';
+import 'package:project2/widgets/colors.dart';
 
 class ColorsTabBar extends StatelessWidget {
   const ColorsTabBar({super.key, required this.onTap});

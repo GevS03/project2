@@ -4,9 +4,8 @@ part of 'item_bloc.dart';
 sealed class ItemEvent {}
 
 class ItemAddEvent extends ItemEvent {
-  final List<Item> selectedItems;
-  final Item selectedItem;
+  final SelectedItem selectedItem;
 
-  ItemAddEvent({required this.selectedItems, required this.selectedItem});
+  ItemAddEvent({required this.selectedItem});
 }
 

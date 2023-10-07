@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project2/items.dart';
+import 'package:project2/widgets/items.dart';
 
 class ItemsTabBar extends StatelessWidget {
   const ItemsTabBar({super.key, required this.onTap});

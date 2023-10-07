@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project2/colors.dart';
 import 'package:project2/item_bloc/bloc/item_bloc.dart';
-import 'package:project2/items.dart';
-import 'package:project2/widgets/add_button.dart';
 import 'widgets/widgets_export.dart';
 
 
@@ -15,14 +12,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Item> selectedItems = [];
+  late ItemBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    bloc = ItemBloc();
+  }
 
   Item? selecteditem;
   Color? selectedColor;
 
   @override
   Widget build(BuildContext context) {
-    final itemBloc = ItemBloc();
     return Scaffold(
       backgroundColor: const Color.fromARGB(115, 158, 158, 158),
       appBar: AppBar(
@@ -32,39 +35,27 @@ class _MyAppState extends State<MyApp> {
       ),
       body: SingleChildScrollView(
           child: BlocProvider(
-        create: (context) => itemBloc,
+        create: (context) => bloc,
         child: Column(
           children: [
             ItemsTabBar(onTap: (int itemIndex) {
-              selecteditem = items[itemIndex];
+              setState(() {
+                selecteditem = items[itemIndex];
+              });
             }),
             ColorsTabBar(onTap: (int colorIndex) {
-              selectedColor = colors[colorIndex].color;
+              setState(() {
+                selectedColor = colors[colorIndex].color;
+              });
             }),
             const Padding(padding: EdgeInsets.only(top: 40)),
             AddButton(onPressed: () {
-              if(selecteditem != null) {
-                itemBloc.add(ItemAddEvent(selectedItems: selectedItems, selectedItem: Item(
-                  width: selecteditem!.width,
-                  height: selecteditem!.height,
-                  topLeftR: selecteditem!.topLeftR,
-                  topRightR: selecteditem!.topRightR,
-                  bottomLeftR: selecteditem!.bottomLeftR,
-                  bottomRightR: selecteditem!.bottomRightR,
-                  color: selectedColor ?? Colors.white,
-                  margin: 30,
-                )));
-              }else {
-                showDialog(context: context, builder: (context) {
-                  return AlertDialog(
-                    content: Text('Please Add Item'),
-                  );
-                });
-              }
-              
-                  
+              bloc.add(ItemAddEvent(selectedItem: SelectedItem(
+                item: selecteditem ?? items.first,
+                color: selectedColor ?? colors.first.color,
+              )));                
             }),
-            SelectedItemsColumn(itemBloc: itemBloc)
+            SelectedItemsColumn(itemBloc: bloc)
           ],
         ),
       )),

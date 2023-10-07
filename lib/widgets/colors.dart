@@ -1,5 +1,5 @@
   import 'package:flutter/material.dart';
-import 'package:project2/widgets/color.dart';
+import 'package:project2/widgets/color_model.dart';
 
 final List<ItemColor> colors = [
   const ItemColor(color: Colors.red),

@@ -15,8 +15,15 @@ class SelectedItemsColumn extends StatelessWidget {
     return BlocBuilder<ItemBloc, ItemState>(
       bloc: itemBloc,
       builder: (context, state) {
-        return Column(
-          children: state.selectedItems,
+        return  Column(
+          children: [
+            ...state.selectedItems.map((item) {
+              return Container(
+                margin: const EdgeInsets.all(30),
+                child: item,
+              );
+            })
+          ],
         );
       },
     );
